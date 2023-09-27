@@ -9,7 +9,12 @@ const CartScreen = ({navigation}) => {
   const cart = useSelector(state => state.cart.inCartProducts);
 
   const renderCard = ({item}) => {
-    return <CartCard item={item} />;
+    return (
+      <CartCard
+        item={item}
+        onPress={() => navigation.navigate('DetailScreen', {item})}
+      />
+    );
   };
   const total = cart.reduce((acc, curr) => acc + curr.price, 0);
 
@@ -72,7 +77,7 @@ const CartScreen = ({navigation}) => {
         Discover the products that interest you now
       </Text>
       <TouchableOpacity
-        onPress={() => navigation.navigate('HomeScreen')}
+        onPress={() => navigation.navigate('HomeStack')}
         style={{
           backgroundColor: '#347aeb',
           borderRadius: 15,

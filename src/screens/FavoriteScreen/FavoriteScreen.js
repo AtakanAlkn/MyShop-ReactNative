@@ -8,7 +8,12 @@ import Icon from 'react-native-vector-icons/FontAwesome5';
 
 const FavoriteScreen = ({navigation}) => {
   const renderCard = ({item}) => {
-    return <FavoriteCard item={item} />;
+    return (
+      <FavoriteCard
+        item={item}
+        onPress={() => navigation.navigate('DetailScreen', {item})}
+      />
+    );
   };
   const dispatch = useDispatch();
   const favorite = useSelector(state => state.favorite.favoriteProducts);
@@ -39,7 +44,7 @@ const FavoriteScreen = ({navigation}) => {
         Discover the products that interest you now
       </Text>
       <TouchableOpacity
-        onPress={() => navigation.navigate('HomeScreen')}
+        onPress={() => navigation.navigate('HomeStack')}
         style={{
           backgroundColor: '#347aeb',
           borderRadius: 15,

@@ -12,7 +12,7 @@ import {useSelector, useDispatch} from 'react-redux';
 import {add, remove} from '../../../../redux/FavoriteSlice';
 import {addCart, removeCart} from '../../../../redux/CartSlice';
 
-const ProductCard = ({item}) => {
+const ProductCard = ({item, onPress}) => {
   const [isFill, setIsFill] = useState(false);
   const dispatch = useDispatch();
   const favorite = useSelector(state => state.favorite.favoriteProducts);
@@ -26,59 +26,63 @@ const ProductCard = ({item}) => {
   }, [favorite]);
 
   return (
-    <View style={styles.container}>
-      <View style={styles.innerContainer}>
-        <View style={styles.ratingContainer}>
-          <Text style={styles.rating}>{item.rating.rate}</Text>
+    <TouchableWithoutFeedback onPress={onPress}>
+      <View style={styles.container}>
+        <View style={styles.innerContainer}>
+          <View style={styles.ratingContainer}>
+            <Text style={styles.rating}>{item.rating.rate}</Text>
+          </View>
+          <View>
+            <TouchableWithoutFeedback
+              onPress={() => {
+                favorite.includes(item)
+                  ? dispatch(remove(item.id))
+                  : dispatch(add(item));
+              }}>
+              {isFill ? (
+                <Icon name="heart" size={20} color={'red'} solid />
+              ) : (
+                <Icon name="heart" size={20} />
+              )}
+            </TouchableWithoutFeedback>
+          </View>
         </View>
         <View>
-          <TouchableWithoutFeedback
-            onPress={() => {
-              favorite.includes(item)
-                ? dispatch(remove(item.id))
-                : dispatch(add(item));
+          <Image source={{uri: item.image}} style={styles.image} />
+          <Text style={styles.title} numberOfLines={2}>
+            {item.title}
+          </Text>
+          <Text style={styles.description} numberOfLines={2}>
+            {item.description}
+          </Text>
+          <View
+            style={{
+              flexDirection: 'row',
+              justifyContent: 'space-between',
+              alignItems: 'center',
             }}>
-            {isFill ? (
-              <Icon name="heart" size={20} color={'red'} solid />
-            ) : (
-              <Icon name="heart" size={20} />
-            )}
-          </TouchableWithoutFeedback>
-        </View>
-      </View>
-      <View>
-        <Image source={{uri: item.image}} style={styles.image} />
-        <Text style={styles.title} numberOfLines={2}>
-          {item.title}
-        </Text>
-        <Text style={styles.description} numberOfLines={2}>
-          {item.description}
-        </Text>
-        <View
-          style={{
-            flexDirection: 'row',
-            justifyContent: 'space-between',
-            alignItems: 'center',
-          }}>
-          <Text style={styles.price}>${item.price}</Text>
-          <TouchableWithoutFeedback>
-            <TouchableWithoutFeedback
-              onPress={() => dispatch(addCart(item))}
-              disabled={isDisabled}>
-              <View style={styles.addButton}>
-                {isDisabled ? (
-                  <Text style={{color: 'black', fontWeight: 'bold'}}>
-                    In Cart
-                  </Text>
-                ) : (
-                  <Text style={{color: 'black', fontWeight: 'bold'}}>Add</Text>
-                )}
-              </View>
+            <Text style={styles.price}>${item.price}</Text>
+            <TouchableWithoutFeedback>
+              <TouchableWithoutFeedback
+                onPress={() => dispatch(addCart(item))}
+                disabled={isDisabled}>
+                <View style={styles.addButton}>
+                  {isDisabled ? (
+                    <Text style={{color: 'black', fontWeight: 'bold'}}>
+                      In Cart
+                    </Text>
+                  ) : (
+                    <Text style={{color: 'black', fontWeight: 'bold'}}>
+                      Add
+                    </Text>
+                  )}
+                </View>
+              </TouchableWithoutFeedback>
             </TouchableWithoutFeedback>
-          </TouchableWithoutFeedback>
+          </View>
         </View>
       </View>
-    </View>
+    </TouchableWithoutFeedback>
   );
 };
 

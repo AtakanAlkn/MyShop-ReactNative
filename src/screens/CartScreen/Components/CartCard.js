@@ -11,7 +11,7 @@ import Icon from 'react-native-vector-icons/Feather';
 import Star from '../../FavoriteScreen/components/Star';
 import {add} from '../../../redux/FavoriteSlice';
 import {removeCart} from '../../../redux/CartSlice';
-const CartCard = ({item}) => {
+const CartCard = ({item, onPress}) => {
   const dispatch = useDispatch();
   const favorite = useSelector(state => state.favorite.favoriteProducts);
   const [isDisabled, setIsDısabled] = useState(false);
@@ -20,81 +20,83 @@ const CartCard = ({item}) => {
     favorite.includes(item) ? setIsDısabled(true) : setIsDısabled(false);
   }, [favorite]);
   return (
-    <View style={styles.container}>
-      <View
-        style={{
-          backgroundColor: 'white',
-          justifyContent: 'center',
-          alignItems: 'center',
-          borderRadius: 15,
-          marginRight: 15,
-        }}>
-        <Image source={{uri: item.image}} style={styles.image} />
-      </View>
-      <View style={styles.textContainer}>
+    <TouchableWithoutFeedback onPress={onPress}>
+      <View style={styles.container}>
         <View
           style={{
-            flexDirection: 'row',
-            justifyContent: 'space-between',
-          }}>
-          <Text
-            style={{
-              fontWeight: 'bold',
-              fontSize: 18,
-              color: 'black',
-              marginBottom: 5,
-            }}
-            numberOfLines={2}>
-            {item.title}
-          </Text>
-          <TouchableWithoutFeedback
-            onPress={() => {
-              dispatch(removeCart(item.id));
-            }}>
-            <Icon
-              name="trash"
-              size={15}
-              color={'black'}
-              style={{marginTop: 5}}
-            />
-          </TouchableWithoutFeedback>
-        </View>
-        <Star number={item.rating.rate} />
-        <View
-          style={{
-            flexDirection: 'row',
-            justifyContent: 'space-between',
+            backgroundColor: 'white',
+            justifyContent: 'center',
             alignItems: 'center',
+            borderRadius: 15,
+            marginRight: 15,
           }}>
-          <Text style={{color: 'black', fontWeight: 'bold', fontSize: 16}}>
-            ${item.price}
-          </Text>
-          <TouchableWithoutFeedback
-            onPress={() => {
-              dispatch(add(item));
-            }}
-            disabled={isDisabled}>
-            <View
+          <Image source={{uri: item.image}} style={styles.image} />
+        </View>
+        <View style={styles.textContainer}>
+          <View
+            style={{
+              flexDirection: 'row',
+              justifyContent: 'space-between',
+            }}>
+            <Text
               style={{
-                backgroundColor: '#e83b2e',
-                borderRadius: 15,
-                paddingHorizontal: 10,
-                paddingVertical: 5,
+                fontWeight: 'bold',
+                fontSize: 18,
+                color: 'black',
+                marginBottom: 5,
+              }}
+              numberOfLines={2}>
+              {item.title}
+            </Text>
+            <TouchableWithoutFeedback
+              onPress={() => {
+                dispatch(removeCart(item.id));
               }}>
-              {isDisabled ? (
-                <Text style={{color: 'white', fontWeight: 'bold'}}>
-                  In Favorite
-                </Text>
-              ) : (
-                <Text style={{color: 'white', fontWeight: 'bold'}}>
-                  + Add to favorite
-                </Text>
-              )}
-            </View>
-          </TouchableWithoutFeedback>
+              <Icon
+                name="trash"
+                size={15}
+                color={'black'}
+                style={{marginTop: 5}}
+              />
+            </TouchableWithoutFeedback>
+          </View>
+          <Star number={item.rating.rate} />
+          <View
+            style={{
+              flexDirection: 'row',
+              justifyContent: 'space-between',
+              alignItems: 'center',
+            }}>
+            <Text style={{color: 'black', fontWeight: 'bold', fontSize: 16}}>
+              ${item.price}
+            </Text>
+            <TouchableWithoutFeedback
+              onPress={() => {
+                dispatch(add(item));
+              }}
+              disabled={isDisabled}>
+              <View
+                style={{
+                  backgroundColor: '#e83b2e',
+                  borderRadius: 15,
+                  paddingHorizontal: 10,
+                  paddingVertical: 5,
+                }}>
+                {isDisabled ? (
+                  <Text style={{color: 'white', fontWeight: 'bold'}}>
+                    In Favorite
+                  </Text>
+                ) : (
+                  <Text style={{color: 'white', fontWeight: 'bold'}}>
+                    + Add to favorite
+                  </Text>
+                )}
+              </View>
+            </TouchableWithoutFeedback>
+          </View>
         </View>
       </View>
-    </View>
+    </TouchableWithoutFeedback>
   );
 };
 

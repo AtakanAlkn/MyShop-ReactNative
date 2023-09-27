@@ -13,9 +13,9 @@ import Icon from 'react-native-vector-icons/Feather';
 import fetchData from '../hooks/useFetch/useFetch';
 import config from '../../../config';
 import ProductCard from './components/ProductCard/ProductCard';
-import LottieView from 'lottie-react-native';
+import Lottie from 'lottie-react-native';
 
-const HomeScreen = () => {
+const HomeScreen = ({navigation}) => {
   const numColumns = 2;
   const URL = config.API_URL;
 
@@ -83,8 +83,13 @@ const HomeScreen = () => {
     );
   };
 
-  const renderProduct = ({item}) => {
-    return <ProductCard item={item} />;
+  const renderProduct = ({item, onPress}) => {
+    return (
+      <ProductCard
+        item={item}
+        onPress={() => navigation.navigate('DetailScreen', {item})}
+      />
+    );
   };
 
   return products.length !== 0 ? (
@@ -177,7 +182,7 @@ const HomeScreen = () => {
         justifyContent: 'center',
         alignItems: 'center',
       }}>
-      <LottieView
+      <Lottie
         source={require('../../assets/animations/animation_ln0f8fgk.json')}
         autoPlay={false}
       />

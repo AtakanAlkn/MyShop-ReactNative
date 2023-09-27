@@ -1,13 +1,12 @@
 import React from 'react';
-import {StatusBar, View, Button, TouchableWithoutFeedback} from 'react-native';
+import {StatusBar, View, TouchableWithoutFeedback} from 'react-native';
 import {NavigationContainer} from '@react-navigation/native';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-import HomeScreen from './screens/HomeScreen/HomeScreen';
-import FavoriteScreen from './screens/FavoriteScreen/FavoriteScreen';
-import CartScreen from './screens/CartScreen/CartScreen';
-import ProfileScreen from './screens/ProfileScreen/ProfileScreen';
 import Icon from 'react-native-vector-icons/FontAwesome5';
-import BackIcon from 'react-native-vector-icons/MaterialCommunityIcons';
+import HomeStack from './navigator/StackNavigator/HomeStack';
+import FavoriteStack from './navigator/StackNavigator/FavoriteStack';
+import CartStack from './navigator/StackNavigator/CartStack';
+import ProfileStack from './navigator/StackNavigator/ProfileStack';
 
 const Tab = createBottomTabNavigator();
 
@@ -32,13 +31,13 @@ const Router = () => {
             let iconName;
             let backgroundColor;
 
-            if (route.name === 'HomeScreen') {
+            if (route.name === 'HomeStack') {
               iconName = 'home';
-            } else if (route.name === 'FavoriteScreen') {
+            } else if (route.name === 'FavoriteStack') {
               iconName = 'heart';
-            } else if (route.name === 'CartScreen') {
+            } else if (route.name === 'CartStack') {
               iconName = 'shopping-cart';
-            } else if (route.name === 'ProfileScreen') {
+            } else if (route.name === 'ProfileStack') {
               iconName = 'user';
             }
 
@@ -64,13 +63,13 @@ const Router = () => {
           },
         })}>
         <Tab.Screen
-          name="HomeScreen"
-          component={HomeScreen}
+          name="HomeStack"
+          component={HomeStack}
           options={{headerShown: false}}
         />
         <Tab.Screen
-          name="FavoriteScreen"
-          component={FavoriteScreen}
+          name="FavoriteStack"
+          component={FavoriteStack}
           options={({navigation}) => ({
             headerTitleAlign: 'center',
             headerTitle: 'My Favorites',
@@ -87,8 +86,8 @@ const Router = () => {
           })}
         />
         <Tab.Screen
-          name="CartScreen"
-          component={CartScreen}
+          name="CartStack"
+          component={CartStack}
           options={({navigation}) => ({
             headerTitleAlign: 'center',
             headerTitle: 'My Cart',
@@ -105,8 +104,8 @@ const Router = () => {
           })}
         />
         <Tab.Screen
-          name="ProfileScreen"
-          component={ProfileScreen}
+          name="ProfileStack"
+          component={ProfileStack}
           options={({navigation}) => ({
             headerTitleAlign: 'center',
             headerTitle: 'My Profile',

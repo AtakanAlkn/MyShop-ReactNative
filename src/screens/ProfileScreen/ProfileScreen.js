@@ -1,9 +1,12 @@
 import React from 'react';
-import {View, Text, TouchableWithoutFeedback} from 'react-native';
+import {View, Text, TouchableWithoutFeedback, Dimensions} from 'react-native';
 import styles from './ProfileScreenStyle';
 import Icon from 'react-native-vector-icons/Feather';
+import {useSelector} from 'react-redux';
 
 const ProfileScreen = () => {
+  const user = useSelector(state => state.user.userData);
+
   return (
     <View style={styles.container}>
       <View style={{flex: 1, backgroundColor: 'white'}}></View>
@@ -15,11 +18,11 @@ const ProfileScreen = () => {
           }}>
           <Icon name="edit" color={'#347aeb'} size={25} style={{margin: 20}} />
         </View>
-
         <View
           style={{
             paddingBottom: 20,
-            paddingHorizontal: 120,
+            minWidth: Dimensions.get('window').width / 1.2,
+            paddingHorizontal: 30,
             justifyContent: 'center',
             alignItems: 'center',
           }}>
@@ -28,8 +31,15 @@ const ProfileScreen = () => {
               height: 60,
               width: 60,
               borderRadius: 30,
-              backgroundColor: 'black',
-            }}></View>
+              borderWidth: 1,
+              justifyContent: 'center',
+              alignItems: 'center',
+              backgroundColor: 'rgba(160, 193, 210)',
+            }}>
+            <Text style={{fontSize: 30, fontWeight: 'bold', color: 'black'}}>
+              {user.name.firstname[0].toUpperCase()}
+            </Text>
+          </View>
           <Text
             style={{
               fontWeight: 'bold',
@@ -37,9 +47,12 @@ const ProfileScreen = () => {
               fontSize: 16,
               marginVertical: 10,
             }}>
-            Atakan Alkan
+            {user.name.firstname.toUpperCase()}{' '}
+            {user.name.lastname.toUpperCase()}
           </Text>
-          <Text style={{fontWeight: 'bold', fontSize: 16}}>@atakanalkn</Text>
+          <Text style={{fontWeight: 'bold', fontSize: 16}}>
+            @{user.username}
+          </Text>
         </View>
       </View>
 

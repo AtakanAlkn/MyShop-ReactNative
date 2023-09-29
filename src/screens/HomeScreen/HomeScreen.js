@@ -10,7 +10,7 @@ import {
 } from 'react-native';
 import styles from './HomeScreenStyle';
 import Icon from 'react-native-vector-icons/Feather';
-import fetchData from '../hooks/useFetch/useFetch';
+import fetchData from '../../hooks/useFetch/useFetch';
 import config from '../../../config';
 import ProductCard from './components/ProductCard/ProductCard';
 import Lottie from 'lottie-react-native';
@@ -176,16 +176,12 @@ const HomeScreen = ({navigation}) => {
   ) : (
     <View
       style={{
-        flex: 1,
-        backgroundColor: 'white',
-
+        backgroundColor: '#FFFFFF',
         justifyContent: 'center',
         alignItems: 'center',
+        flex: 1,
       }}>
-      <Lottie
-        source={require('../../assets/animations/animation_ln0f8fgk.json')}
-        autoPlay={false}
-      />
+      <ActivityIndicator size={50} color="#347aeb" />
     </View>
   );
 };

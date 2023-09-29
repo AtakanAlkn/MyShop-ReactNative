@@ -12,8 +12,8 @@ const styles = reactNative.StyleSheet.create({
     zIndex: 2,
     borderRadius: 18,
     borderWidth: 1,
-    top: 100,
-    right: Dimensions.get('window').width / 15,
+    marginTop: 100,
+    alignSelf: 'center',
   },
   buttonContainer: {
     justifyContent: 'flex-start',

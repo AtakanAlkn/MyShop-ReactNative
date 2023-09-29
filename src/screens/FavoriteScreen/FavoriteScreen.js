@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {View, Text, Button, FlatList, TouchableOpacity} from 'react-native';
 import styles from './FavoriteScreenStyle';
 import {useSelector, useDispatch} from 'react-redux';
@@ -15,8 +15,10 @@ const FavoriteScreen = ({navigation}) => {
       />
     );
   };
+
   const dispatch = useDispatch();
   const favorite = useSelector(state => state.favorite.favoriteProducts);
+
   return favorite.length !== 0 ? (
     <View style={styles.container}>
       <FlatList

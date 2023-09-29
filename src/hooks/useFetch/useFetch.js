@@ -22,9 +22,7 @@ const fetchData = url => {
       const uniqueCategories = Array.from(new Set(categories));
 
       setProductCategories(uniqueCategories);
-    } catch (e) {
-      console.log(e);
-    }
+    } catch (e) {}
   };
 
   useEffect(() => {

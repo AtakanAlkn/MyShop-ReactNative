@@ -16,7 +16,7 @@ const CartScreen = ({navigation}) => {
       />
     );
   };
-  const total = cart.reduce((acc, curr) => acc + curr.price, 0);
+  const total = cart.reduce((acc, curr) => acc + curr.price, 0).toFixed(2);
 
   return cart.length !== 0 ? (
     <View style={styles.container}>

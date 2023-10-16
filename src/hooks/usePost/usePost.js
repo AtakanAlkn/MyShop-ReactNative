@@ -21,13 +21,28 @@ const usePost = () => {
           setLoading(false);
           return true;
         } else {
-          Alert.alert('Wrong password');
+          Alert.alert('Wrong password', '', [
+            {
+              text: 'OK',
+              onPress: () => {
+                setLoading(false);
+              },
+            },
+          ]);
         }
       } else {
-        Alert.alert('E-mail was not found');
+        Alert.alert('E-mail was not found', '', [
+          {
+            text: 'OK',
+            onPress: () => {
+              setLoading(false);
+            },
+          },
+        ]);
       }
     } catch (e) {
       console.log(e);
+      setLoading(false);
       return false;
     }
   };

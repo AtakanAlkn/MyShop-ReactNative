@@ -1,12 +1,12 @@
-import {useEffect} from 'react';
 import {createSlice} from '@reduxjs/toolkit';
-import AsyncStorage from '@react-native-async-storage/async-storage';
+
+const initialState = {
+  favoriteProducts: [],
+};
 
 const favoriteSlice = createSlice({
   name: 'favorite',
-  initialState: {
-    favoriteProducts: [],
-  },
+  initialState,
   reducers: {
     add: (state, action) => {
       state.favoriteProducts.push(action.payload);

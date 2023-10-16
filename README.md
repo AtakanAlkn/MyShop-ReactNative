@@ -35,7 +35,7 @@ Welcome to **MyShop App**, a React Native application designed to enhance your s
   </div>
   
   <div style="margin-bottom: 20px;">
-    <img src="images/m4.gif" alt="GIF" width="300">
+    <img src="images/m4.jpeg" alt="GIF" width="300">
     <p style="font-weight: bold;">Profile Screen</p>
   </div>
 </div>

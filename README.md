@@ -1,5 +1,12 @@
 # MyShop Project
 
+## Default Login Credentials
+
+To access the application, you can use the following default login credentials:
+
+- **Email:** john@gmail.com
+- **Password:** m38rmF$
+
 ## Overview
 
 Welcome to **MyShop App**, a React Native application designed to enhance your shopping experience. MyShop allows users to add products to favorites, manage shopping cart, sort products, and perform searches with ease. The app utilizes Redux for state management, providing a seamless user experience.
